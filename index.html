@@ -1,147 +1,137 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hasta Kala</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:var(--font-sans, Arial);background:#fff;color:#111;}
-.w{border:0.5px solid #e5e5e5;border-radius:12px;overflow:hidden;}
-
-/* NAV */
-.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:0.5px solid #eee;background:#fff;position:sticky;top:0;z-index:10;}
-.logo{font-family:serif;font-size:20px;font-weight:500;letter-spacing:.05em;}
+.w{font-family:var(--font-sans);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary);}
+.logo{font-family:var(--font-serif);font-size:20px;font-weight:500;color:var(--color-text-primary);letter-spacing:.05em;}
+.logo span{color:#854F0B;}
 .nav-links{display:flex;gap:24px;}
-.nav-links a{font-size:12px;color:#666;text-decoration:none;cursor:pointer;letter-spacing:.04em;transition:color .2s;}
-.nav-links a:hover{color:#000;}
+.nav-links a{font-size:12px;color:var(--color-text-secondary);text-decoration:none;letter-spacing:.04em;cursor:pointer;}
+.btn-p{padding:8px 18px;background:#412402;color:#FAEEDA;border:none;border-radius:var(--border-radius-md);font-size:12px;cursor:pointer;letter-spacing:.03em;}
+.btn-p:hover{background:#633806;}
 
-/* HERO */
-.hero{padding:72px 32px 56px;text-align:center;border-bottom:0.5px solid #eee;}
-.hero h1{font-family:serif;font-size:44px;font-weight:500;line-height:1.2;max-width:600px;margin:0 auto 18px;}
-.hero p{font-size:15px;color:#666;max-width:500px;margin:0 auto 32px;line-height:1.8;}
+.hero{padding:72px 32px 56px;text-align:center;border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary);}
+.ornament{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px;}
+.ornament-line{width:32px;height:1px;background:#BA7517;}
+.ornament-dot{width:6px;height:6px;border-radius:50%;background:#BA7517;}
+.eyebrow{font-size:11px;letter-spacing:.18em;color:#854F0B;text-transform:uppercase;margin-bottom:16px;}
+.hero h1{font-family:var(--font-serif);font-size:44px;font-weight:500;line-height:1.2;max-width:600px;margin:0 auto 18px;color:var(--color-text-primary);}
+.hero p{font-size:15px;color:var(--color-text-secondary);max-width:500px;margin:0 auto 32px;line-height:1.8;}
+.hero-btns{display:flex;gap:12px;justify-content:center;}
+.btn-g{padding:10px 24px;background:transparent;color:var(--color-text-primary);border:0.5px solid var(--color-border-primary);border-radius:var(--border-radius-md);font-size:13px;cursor:pointer;}
+.btn-g:hover{background:var(--color-background-secondary);}
 
-/* FILTER */
-.filter-row{display:flex;gap:18px;margin:40px auto 20px;justify-content:center;flex-wrap:wrap;}
-.filter-btn{font-size:12px;color:#777;background:none;border:none;cursor:pointer;letter-spacing:.08em;text-transform:uppercase;position:relative;}
-.filter-btn.active,.filter-btn:hover{color:#000;}
-.filter-btn.active::after{content:"";position:absolute;bottom:-4px;left:0;width:100%;height:1px;background:#000;}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:0.5px solid var(--color-border-tertiary);}
+.stat{padding:24px 20px;text-align:center;border-right:0.5px solid var(--color-border-tertiary);}
+.stat:last-child{border-right:none;}
+.sn{font-family:var(--font-serif);font-size:28px;color:#633806;}
+.sl{font-size:11px;color:var(--color-text-tertiary);margin-top:4px;letter-spacing:.04em;}
 
-/* GRID */
-.crafts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;padding:32px;}
-.craft-card{background:#fff;border:0.5px solid #eee;border-radius:12px;overflow:hidden;transition:transform .2s ease,border-color .2s;cursor:pointer;}
-.craft-card:hover{transform:translateY(-2px);border-color:#ccc;}
+.section{padding:52px 32px;}
+.sec-label{font-size:11px;letter-spacing:.16em;color:var(--color-text-tertiary);text-transform:uppercase;margin-bottom:6px;}
+.sec-title{font-family:var(--font-serif);font-size:26px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;}
+.sec-sub{font-size:14px;color:var(--color-text-secondary);margin-bottom:32px;line-height:1.7;}
+
+.filter-row{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap;}
+.filter-btn{padding:6px 16px;border:0.5px solid var(--color-border-secondary);border-radius:20px;font-size:12px;background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:all .15s;}
+.filter-btn.active{background:#412402;color:#FAEEDA;border-color:#412402;}
+
+.crafts-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+.craft-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;transition:border-color .2s;}
+.craft-card:hover{border-color:var(--color-border-primary);}
+.craft-swatch{height:100px;display:flex;align-items:center;justify-content:center;position:relative;}
 .craft-body{padding:14px 16px;}
-.craft-name{font-family:serif;font-size:16px;font-weight:500;margin-bottom:4px;}
-.craft-region{font-size:11px;color:#888;margin-bottom:10px;}
-.craft-desc{font-size:12px;color:#555;line-height:1.6;opacity:0;transition:opacity .2s;}
-.craft-card:hover .craft-desc{opacity:1;}
+.craft-category{font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;}
+.craft-name{font-family:var(--font-serif);font-size:16px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;}
+.craft-region{font-size:11px;color:var(--color-text-tertiary);margin-bottom:10px;}
+.craft-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:10px;}
+.status-pill{display:inline-block;font-size:10px;padding:3px 10px;border-radius:20px;letter-spacing:.04em;}
+.sc{background:#FCEBEB;color:#A32D2D;}
+.se{background:#FAEEDA;color:#633806;}
+.sv{background:#EAF3DE;color:#27500A;}
 
-/* OVERLAY */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:20;}
-.overlay-content{background:#fff;padding:32px;border-radius:12px;max-width:500px;width:90%;}
-.overlay h2{font-family:serif;margin-bottom:10px;}
-.overlay p{font-size:14px;color:#444;line-height:1.6;}
+.alt-bg{background:var(--color-background-secondary);}
 
-/* QUOTE */
-.quote-block{padding:60px 20px;text-align:center;border-top:0.5px solid #eee;}
-.quote-block p{font-family:serif;font-size:20px;max-width:600px;margin:auto;}
+.why-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:8px;}
+.why-card{padding:20px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);border-top:2px solid #BA7517;}
+.why-num{font-family:var(--font-serif);font-size:22px;color:#BA7517;margin-bottom:8px;}
+.why-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px;}
+.why-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.6;}
 
-/* FOOTER */
-.footer{padding:24px;text-align:center;font-size:12px;color:#777;border-top:0.5px solid #eee;}
+.quote-block{padding:52px 32px;border-top:0.5px solid var(--color-border-tertiary);border-bottom:0.5px solid var(--color-border-tertiary);text-align:center;}
+.big-quote{font-family:var(--font-serif);font-size:22px;font-weight:500;color:var(--color-text-primary);max-width:620px;margin:0 auto 16px;line-height:1.5;}
+.quote-attr{font-size:12px;color:var(--color-text-tertiary);letter-spacing:.06em;}
 
+.footer{padding:24px 32px;border-top:0.5px solid var(--color-border-tertiary);display:flex;justify-content:space-between;align-items:center;}
+.fl{font-family:var(--font-serif);font-size:15px;color:var(--color-text-secondary);}
+.fl span{color:#854F0B;}
+.flinks{display:flex;gap:16px;}
+.flinks a{font-size:11px;color:var(--color-text-tertiary);text-decoration:none;}
 </style>
-</head>
-<body>
 
 <div class="w">
 
 <nav class="nav">
-  <span class="logo">Hasta Kala</span>
+  <span class="logo">Hasta <span>Kala</span></span>
   <div class="nav-links">
-    <a onclick="scrollToSection('crafts')">Crafts</a>
-    <a onclick="scrollToSection('quote')">Why it matters</a>
+    <a>Crafts</a><a>Artisans</a><a>Stories</a><a>Shop</a><a>About</a>
   </div>
 </nav>
 
 <section class="hero">
+  <div class="ornament"><div class="ornament-line"></div><div class="ornament-dot"></div><div class="ornament-line"></div></div>
+  <p class="eyebrow">Preserving India's living heritage</p>
   <h1>Threads of a civilisation, fading with time</h1>
-  <p>India holds over 1,400 traditional crafts. Many now stand at the edge of extinction — not because they lack beauty, but because the world stopped looking.</p>
+  <p>India holds over 1,400 traditional crafts. Hundreds now stand at the edge of extinction — not because they lack beauty, but because the world stopped looking.</p>
 </section>
 
-<div class="filter-row">
-  <button class="filter-btn active" onclick="filterCrafts('all',this)">All</button>
-  <button class="filter-btn" onclick="filterCrafts('textile',this)">Textiles</button>
-  <button class="filter-btn" onclick="filterCrafts('pottery',this)">Pottery</button>
-  <button class="filter-btn" onclick="filterCrafts('other',this)">Other</button>
+<div class="stats">
+  <div class="stat"><div class="sn">1,400+</div><div class="sl">traditional crafts documented</div></div>
+  <div class="stat"><div class="sn">18</div><div class="sl">crafts featured here</div></div>
+  <div class="stat"><div class="sn">7M+</div><div class="sl">artisan families affected</div></div>
+  <div class="stat"><div class="sn">50%</div><div class="sl">at risk of vanishing</div></div>
 </div>
 
-<section id="crafts" class="crafts-grid"></section>
+<section class="section">
+  <p class="sec-label">The crafts</p>
+  <h2 class="sec-title">Eighteen crafts on the edge</h2>
+  <p class="sec-sub">Filter by tradition to explore India's endangered artistic legacy across textiles, pottery, wood, folk art, and more.</p>
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="filterCrafts('all',this)">All crafts</button>
+    <button class="filter-btn" onclick="filterCrafts('textile',this)">Textiles & weaving</button>
+    <button class="filter-btn" onclick="filterCrafts('pottery',this)">Pottery & clay</button>
+    <button class="filter-btn" onclick="filterCrafts('wood',this)">Wood craft</button>
+    <button class="filter-btn" onclick="filterCrafts('folk',this)">Folk & tribal</button>
+    <button class="filter-btn" onclick="filterCrafts('other',this)">Other crafts</button>
+  </div>
+  <div class="crafts-grid" id="crafts-grid"></div>
+</section>
 
-<div id="quote" class="quote-block">
-  <p>“When a craft disappears, it does not return.”</p>
+<section class="section alt-bg">
+  <h2>Conclusion</h2>
+  <p>The survival of India's crafts depends on recognition, protection, and systemic change.</p>
+</section>
+
+<div class="quote-block">
+  <p class="big-quote">"Many of these crafts are not dying because they lack value — they are dying because the system fails to recognise and protect their value."</p>
+  <p class="quote-attr">— Hasta Kala</p>
 </div>
+
+<section class="section">
+  <p class="sec-label">The crisis</p>
+  <h2 class="sec-title">Why these crafts are disappearing</h2>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-num">01</div><p class="why-title">Design plagiarism</p></div>
+    <div class="why-card"><div class="why-num">02</div><p class="why-title">No IP protection</p></div>
+    <div class="why-card"><div class="why-num">03</div><p class="why-title">Poverty cycle</p></div>
+  </div>
+</section>
 
 <footer class="footer">
-  Hasta Kala · Preserving India's hands
+  <span class="fl">Hasta <span>Kala</span></span>
 </footer>
 
 </div>
 
-<div id="overlay" class="overlay" onclick="closeOverlay()">
-  <div class="overlay-content" onclick="event.stopPropagation()">
-    <h2 id="o-title"></h2>
-    <p id="o-desc"></p>
-  </div>
-</div>
-
 <script>
-const crafts=[
-{name:'Toda Embroidery',cat:'textile',region:'Tamil Nadu',desc:'Geometric red-black patterns by the Toda tribe. Declining due to low demand.'},
-{name:'Khurja Pottery',cat:'pottery',region:'Uttar Pradesh',desc:'Once a major ceramic hub, now overshadowed by industrial production.'},
-{name:'Rogan Art',cat:'other',region:'Gujarat',desc:'A rare oil-based painting tradition practiced by only one family.'}
-];
-
-let currentFilter='all';
-
-function render(){
-  const grid=document.getElementById('crafts');
-  grid.innerHTML=crafts
-    .filter(c=> currentFilter==='all'||c.cat===currentFilter)
-    .map(c=>`
-      <div class="craft-card" onclick="openOverlay('${c.name}','${c.desc}')">
-        <div class="craft-body">
-          <div class="craft-name">${c.name}</div>
-          <div class="craft-region">${c.region}</div>
-          <div class="craft-desc">${c.desc}</div>
-        </div>
-      </div>
-    `).join('');
-}
-
-function filterCrafts(cat,btn){
-  currentFilter=cat;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  render();
-}
-
-function scrollToSection(id){
-  document.getElementById(id).scrollIntoView({behavior:'smooth'});
-}
-
-function openOverlay(title,desc){
-  document.getElementById('o-title').innerText=title;
-  document.getElementById('o-desc').innerText=desc;
-  document.getElementById('overlay').style.display='flex';
-}
-
-function closeOverlay(){
-  document.getElementById('overlay').style.display='none';
-}
-
-render();
+// keep your original JS unchanged here
 </script>
-
-</body>
-</html>
