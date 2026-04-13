@@ -2,11 +2,12 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 .w{font-family:var(--font-sans);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary);}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:0.5px solid var(--color-border-tertiary);background:var(--color-background-primary);position:sticky;top:0;z-index:10;}
 .logo{font-family:var(--font-serif);font-size:20px;font-weight:500;color:var(--color-text-primary);letter-spacing:.05em;}
 .logo span{color:#854F0B;}
 .nav-links{display:flex;gap:24px;}
-.nav-links a{font-size:12px;color:var(--color-text-secondary);text-decoration:none;letter-spacing:.04em;cursor:pointer;}
+.nav-links a{font-size:12px;color:var(--color-text-secondary);text-decoration:none;letter-spacing:.04em;cursor:pointer;transition:color .15s;}
+.nav-links a:hover{color:#854F0B;}
 .nav-cta{padding:8px 18px;background:#412402;color:#FAEEDA;border:none;border-radius:var(--border-radius-md);font-size:12px;cursor:pointer;letter-spacing:.03em;}
 .nav-cta:hover{background:#633806;}
 
@@ -18,9 +19,9 @@
 .hero h1{font-family:var(--font-serif);font-size:44px;font-weight:500;line-height:1.2;max-width:600px;margin:0 auto 18px;color:var(--color-text-primary);}
 .hero p{font-size:15px;color:var(--color-text-secondary);max-width:500px;margin:0 auto 32px;line-height:1.8;}
 .hero-btns{display:flex;gap:12px;justify-content:center;}
-.btn-p{padding:10px 24px;background:#412402;color:#FAEEDA;border:none;border-radius:var(--border-radius-md);font-size:13px;cursor:pointer;letter-spacing:.03em;}
+.btn-p{padding:10px 24px;background:#412402;color:#FAEEDA;border:none;border-radius:var(--border-radius-md);font-size:13px;cursor:pointer;letter-spacing:.03em;transition:background .15s;}
 .btn-p:hover{background:#633806;}
-.btn-g{padding:10px 24px;background:transparent;color:var(--color-text-primary);border:0.5px solid var(--color-border-primary);border-radius:var(--border-radius-md);font-size:13px;cursor:pointer;}
+.btn-g{padding:10px 24px;background:transparent;color:var(--color-text-primary);border:0.5px solid var(--color-border-primary);border-radius:var(--border-radius-md);font-size:13px;cursor:pointer;transition:background .15s;}
 .btn-g:hover{background:var(--color-background-secondary);}
 
 .stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:0.5px solid var(--color-border-tertiary);}
@@ -78,14 +79,17 @@
 .flinks a{font-size:11px;color:var(--color-text-tertiary);text-decoration:none;}
 </style>
 
-<div class="w">
+<div class="w" id="site-root">
 
 <nav class="nav">
   <span class="logo">Hasta <span>Kala</span></span>
   <div class="nav-links">
-    <a>Crafts</a><a>Artisans</a><a>Stories</a><a>About</a>
+    <a onclick="scrollTo('sec-crafts')">Crafts</a>
+    <a onclick="scrollTo('sec-artisans')">Artisans</a>
+    <a onclick="scrollTo('sec-stories')">Stories</a>
+    <a onclick="scrollTo('sec-about')">About</a>
   </div>
-  <button class="nav-cta" onclick="sendPrompt('How can I support dying crafts of India?')">Get involved ↗</button>
+  <button class="nav-cta" onclick="scrollTo('sec-artisans')">Get involved ↗</button>
 </nav>
 
 <section class="hero">
@@ -94,8 +98,8 @@
   <h1>Threads of a civilisation, fading with time</h1>
   <p>India holds over 1,400 traditional crafts. Hundreds now stand at the edge of extinction — not because they lack beauty, but because the world stopped looking.</p>
   <div class="hero-btns">
-    <button class="btn-p" onclick="sendPrompt('Tell me about the most critically endangered crafts of India')">Explore all 18 crafts ↗</button>
-    <button class="btn-g" onclick="sendPrompt('How can artisans be supported and crafts revived in India?')">How you can help</button>
+    <button class="btn-p" onclick="scrollTo('sec-crafts')">Explore all 18 crafts ↓</button>
+    <button class="btn-g" onclick="scrollTo('sec-about')">How you can help</button>
   </div>
 </section>
 
@@ -106,7 +110,7 @@
   <div class="stat"><div class="sn">50%</div><div class="sl">at risk of vanishing</div></div>
 </div>
 
-<section class="section">
+<section class="section" id="sec-crafts">
   <p class="sec-label">The crafts</p>
   <h2 class="sec-title">Eighteen crafts on the edge</h2>
   <p class="sec-sub">Hover over any craft icon to bring it to life. Filter by tradition to explore India's endangered artistic legacy.</p>
@@ -121,7 +125,7 @@
   <div class="crafts-grid" id="crafts-grid"></div>
 </section>
 
-<section class="section alt-bg">
+<section class="section alt-bg" id="sec-artisans">
   <p class="sec-label">Artisan voices</p>
   <h2 class="sec-title">The hands behind the heritage</h2>
   <p class="sec-sub">Every craft has a keeper. These are the men and women carrying centuries of knowledge in their hands.</p>
@@ -161,12 +165,13 @@
   </div>
 </section>
 
-<div class="quote-block">
+<div class="quote-block" id="sec-stories">
+  <p class="sec-label" style="text-align:center;margin-bottom:20px;">Stories</p>
   <p class="big-quote">"Many of these crafts are not dying because they lack value — they are dying because the system fails to recognise and protect their value."</p>
   <p class="quote-attr">— Hasta Kala, on craft preservation in India</p>
 </div>
 
-<section class="section">
+<section class="section" id="sec-about">
   <p class="sec-label">The crisis</p>
   <h2 class="sec-title">Why these crafts are disappearing</h2>
   <p class="sec-sub">The causes are systemic — and understanding them is the first step to change.</p>
@@ -190,6 +195,11 @@
 </div>
 
 <script>
+function scrollTo(id){
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
 const crafts=[
   {cat:'textile',name:'Toda Embroidery',region:'Nilgiris, Tamil Nadu',desc:'Geometric red-black patterns by the Toda tribe. Declining due to low commercial demand.',status:'sc',statusLabel:'Critically endangered',swatch:'#FAEEDA',accent:'#BA7517',icon:'emb'},
   {cat:'textile',name:'Kashida Embroidery',region:'Kashmir',desc:'Exquisite hand embroidery on shawls and fabric. Being replaced rapidly by machine work.',status:'se',statusLabel:'Endangered',swatch:'#EEEDFE',accent:'#7F77DD',icon:'kas'},
@@ -250,8 +260,7 @@ function renderCard(c){
   </div>`;
 }
 
-const grid=document.getElementById('crafts-grid');
-grid.innerHTML=crafts.map(renderCard).join('');
+document.getElementById('crafts-grid').innerHTML=crafts.map(renderCard).join('');
 
 function filterCrafts(cat,btn){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
